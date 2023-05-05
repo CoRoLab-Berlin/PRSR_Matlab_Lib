@@ -1,34 +1,33 @@
 //
 //  hw_spi.cpp
-//  
+//
 //
 //  Created by Manuel on 26/2/20.
 //
 
-#include "hw_spi.hpp"
-
+#include "hw_spi.h"
 
 int fdADC;
 int fdDAC;
 
 struct spi_ioc_transfer dacDataframe;
 struct spi_ioc_transfer adcDataframe;
-uint8_t adcReadCode[8+1];
+uint8_t adcReadCode[8 + 1];
 
-void init()
+void spi_init()
 {
     int SPI_SPEED = 5000000;
     int SPI_MODE = 0;
-    static const char* SPI_DAC_DEV = "/dev/spidev0.1";
-    static const char* SPI_ADC_DEV = "/dev/spidev0.0";
+    static const char *SPI_DAC_DEV = "/dev/spidev0.1";
+    static const char *SPI_ADC_DEV = "/dev/spidev0.0";
     // configuration spi_ioc_transfer DAC
-    std::memset(&dacDataframe, 0, sizeof(dacDataframe));
+    memset(&dacDataframe, 0, sizeof(dacDataframe));
     dacDataframe.len = 3;
     dacDataframe.speed_hz = SPI_SPEED;
     dacDataframe.bits_per_word = 8;
 
     // configuration spi_ioc_transfer ADC
-    std::memset(&adcDataframe, 0, sizeof(adcDataframe));
+    memset(&adcDataframe, 0, sizeof(adcDataframe));
     adcDataframe.len = 2;
     adcDataframe.speed_hz = SPI_SPEED;
     adcDataframe.bits_per_word = 8;
@@ -62,11 +61,11 @@ void setDAC(double vout[VOUT_LENGTH])
     unsigned char rxbuf[3];
     memset(txbuf, 0, sizeof txbuf);
     memset(rxbuf, 0, sizeof rxbuf);
-    dacDataframe.tx_buf = (unsigned long) txbuf;
-    dacDataframe.rx_buf = (unsigned long) rxbuf;
-    for(int i = 0; i < VOUT_LENGTH; i++)
+    dacDataframe.tx_buf = (unsigned long)txbuf;
+    dacDataframe.rx_buf = (unsigned long)rxbuf;
+    for (int i = 0; i < VOUT_LENGTH; i++)
     {
-        writeBuffer = int(vout[i]*65535 / 10);
+        writeBuffer = (int)(vout[i] * 65535 / 10);
         txbuf[0] = ((LTC_WRITE << 4) | i);
         txbuf[1] = (writeBuffer >> 8);
         txbuf[2] = (writeBuffer & 0xFF);
@@ -75,28 +74,26 @@ void setDAC(double vout[VOUT_LENGTH])
     }
 }
 
-void getADC(double* vin)
+void getADC(double *vin)
 {
-    
+
     int16_t readBuffer = 0;
     unsigned char txbuf[2];
     unsigned char rxbuf[2];
     memset(txbuf, 0, sizeof(txbuf));
-    memset(rxbuf, 0 ,sizeof(rxbuf));
-    adcDataframe.tx_buf = (unsigned long) txbuf;
-    adcDataframe.rx_buf = (unsigned long) rxbuf;
-    
-    //register configuration for adc port 0
+    memset(rxbuf, 0, sizeof(rxbuf));
+    adcDataframe.tx_buf = (unsigned long)txbuf;
+    adcDataframe.rx_buf = (unsigned long)rxbuf;
+
+    // register configuration for adc port 0
     txbuf[0] = adcReadCode[0];
     ioctl(fdADC, SPI_IOC_MESSAGE(1), &adcDataframe);
 
-    for(int i = 1; i < VIN_LEN+1; i++)
+    for (int i = 1; i < VIN_LEN + 1; i++)
     {
         txbuf[0] = adcReadCode[i];
-    ioctl(fdADC, SPI_IOC_MESSAGE(1), &adcDataframe);
-    readBuffer = rxbuf[0] << 8 | rxbuf[1];
-    vin[i-1] = (double)readBuffer*10/32767;
-    
+        ioctl(fdADC, SPI_IOC_MESSAGE(1), &adcDataframe);
+        readBuffer = rxbuf[0] << 8 | rxbuf[1];
+        vin[i - 1] = (double)readBuffer * 10 / 32767;
     }
 }
-
