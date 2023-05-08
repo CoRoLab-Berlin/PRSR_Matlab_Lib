@@ -1,6 +1,6 @@
 ## PRSR_Matlab_Lib
 
-SPI & IMU
+IMU only
 
 ## Dependencies:
 
