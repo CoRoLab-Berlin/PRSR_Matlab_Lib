@@ -1,6 +1,7 @@
 # Files
 *.elf
 *.slxc
+*.mexa64
 
 # Folders
 slprj/
