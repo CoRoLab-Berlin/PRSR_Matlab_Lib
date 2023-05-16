@@ -91,6 +91,7 @@ void imu_init(double UpdateRateInHertz)
     enable_gyr_noise_perf(&sensor_lower);
     enable_gyr_filter_perf(&sensor_lower);
 
+    // does not affect output frequency of timer in step() loop
     if (UPDATE_RATE <= 25.0)
     {
         set_acc_odr(&sensor_upper, ACC_ODR_25);
