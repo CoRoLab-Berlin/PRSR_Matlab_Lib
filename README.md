@@ -114,19 +114,23 @@ Und folgende Zeilen wie folgt abändern:
 
 **Optional** --- WLAN manuell aktivieren:
 
-(1) `sudo rfkill unblock wifi; sudo rfkill unblock all`
+(1) Softblock des WiFi's aufheben, falls beim Flashen des Images auf die SD nicht explizit aktiviert:
+    
+    sudo rfkill unblock wifi; sudo rfkill unblock all
 
 (2) Mit `sudo nano /etc/network/interfaces` Folgendes hinzufügen:
-allow-hotplug wlan0
-iface wlan0 inet manual
-wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
+    
+    allow-hotplug wlan0
+    iface wlan0 inet manual
+    wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
 
 (3) Mit `sudo nano /etc/wpa_supplicant/wpa_supplicant.conf` Folgendes hinzufügen:
-network={
-	ssid="WLAN Name"
-	psk="WLAN Password"
-	key_mgmt=WPA-PSK
-}
+
+    network={
+	    ssid="WLAN Name"
+	    psk="WLAN Password"
+	    key_mgmt=WPA-PSK
+    }
 
 (4) `sudo reboot`
 
