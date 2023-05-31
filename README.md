@@ -84,7 +84,7 @@ Folgende Zeilen hinzufügen:
 
     sudo raspi-config
 
-(7) I2C Baudrate erhöhen:
+(6) I2C Baudrate erhöhen:
 
     sudo nano /boot/config.txt` 
 
@@ -96,7 +96,7 @@ Die Zeile `dtparam=i2c_baudrate=400000` hinzufügen, damit es wie folgt aussieht
     #dtparam=i2s=on
     dtparam=spi=on
 
-(8) Static IP einrichten:
+(7) Statische IP einrichten:
 
     sudo nano /etc/dhcpcd.conf
 
@@ -109,7 +109,7 @@ Und folgende Zeilen wie folgt abändern:
     static routers=192.168.1.2
     #static domain_name_servers=192.168.0.1 8.8.8.8 fd51:42f8:caae:d92e::1
 
-(9) `sudo reboot`
+(8) `sudo reboot`
 
 
 **Optional** --- WLAN manuell aktivieren:
