@@ -86,7 +86,7 @@ Folgende Zeilen hinzufügen:
 
 (6) I2C Baudrate erhöhen:
 
-    sudo nano /boot/config.txt` 
+    sudo nano /boot/config.txt
 
 Die Zeile `dtparam=i2c_baudrate=400000` hinzufügen, damit es wie folgt aussieht:
 
@@ -109,7 +109,9 @@ Und folgende Zeilen wie folgt abändern:
     static routers=192.168.1.2
     #static domain_name_servers=192.168.0.1 8.8.8.8 fd51:42f8:caae:d92e::1
 
-(8) `sudo reboot`
+(8) Raspberry Pi neustarten:
+    
+    sudo reboot
 
 
 **Optional** --- WLAN manuell aktivieren:
@@ -118,21 +120,31 @@ Und folgende Zeilen wie folgt abändern:
     
     sudo rfkill unblock wifi; sudo rfkill unblock all
 
-(2) Mit `sudo nano /etc/network/interfaces` Folgendes hinzufügen:
+(2) WLAN auto-login aktivieren und konfigurieren:
     
+    sudo nano /etc/network/interfaces
+
+Folgendes hinzufügen:
+
     allow-hotplug wlan0
     iface wlan0 inet manual
     wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
 
-(3) Mit `sudo nano /etc/wpa_supplicant/wpa_supplicant.conf` Folgendes hinzufügen:
+(3) WLAN Informationen einrichten: 
+    
+    sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
+    
+Folgendes hinzufügen:
 
     network={
-	    ssid="WLAN Name"
-	    psk="WLAN Password"
+	    ssid="Name"
+	    psk="Password"
 	    key_mgmt=WPA-PSK
     }
 
-(4) `sudo reboot`
+(4) Raspberry Pi neustarten:
+    
+    `sudo reboot`
 
 
 # Weiteres
