@@ -18,14 +18,14 @@ Zum Speichern nach dem Bearbeiten `STRG+X --> Y --> Enter` drücken
 
 (3) Raspberry Pi einrichten und per Ethernet direkt an Host verbinden (siehe **Raspberry Pi** Setup).
 
-(4) Projekt von GitLab laden, `setup.m` ausführen und `LIB/raspberry_pi_interface.slx` öffnen.
-
-(5) In Ubuntu statische IPv4 einrichten (Host ggf. über WLAN mit dem Internet verbinden, falls möglich und benötigt):
+(4) In Ubuntu statische IPv4 einrichten (Host ggf. über WLAN mit dem Internet verbinden, falls möglich und benötigt):
 
 `Settings` --> `Network` --> `Wired` (Zahnrad) --> `IPv4` --> auf `Manuel` setzen und Folgendes eintragen:
 
     Address: 192.168.1.2
     Netmask: 255.255.255.0
+
+(5) Projekt von GitLab laden, `setup.m` ausführen und `LIB/raspberry_pi_interface.slx` öffnen.
 
 (6) In Simulink unter dem Reiter
 
