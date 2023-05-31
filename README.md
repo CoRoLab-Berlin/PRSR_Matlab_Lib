@@ -145,7 +145,7 @@ Folgendes hinzufügen:
 
 (4) Raspberry Pi neustarten:
     
-    `sudo reboot`
+    sudo reboot
 
 
 # Weiteres
