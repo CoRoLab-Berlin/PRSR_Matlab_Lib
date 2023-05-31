@@ -92,7 +92,7 @@ Die Zeile `dtparam=i2c_baudrate=400000` hinzufügen, damit es wie folgt aussieht
 
     # Uncomment some or all of these to enable the optional hardware interfaces
     dtparam=i2c_arm=on
-    dtparam=i2c_baudrate=400000 hinzufügen
+    dtparam=i2c_baudrate=400000
     #dtparam=i2s=on
     dtparam=spi=on
 
