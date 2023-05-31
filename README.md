@@ -38,6 +38,7 @@ Folgendes eintragen:
     Password: pi
 
 (WARNUNG: Nur Tastatur benutzen falls klicken nicht möglich aufgrund Matlab Bug)
+
 (Unter `Build Options` findet man noch die Option `Run on Boot`)
 
 (7) Build & Monitor sollte nun komplett funktionieren.
