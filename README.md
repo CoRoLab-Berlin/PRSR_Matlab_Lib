@@ -66,7 +66,7 @@ Folgende Zeilen hinzufügen:
 
     [Service]
     ExecStart=
-    ExecStart=-/sbin/agetty --noissue --autologin myusername %I $TERM
+    ExecStart=-/sbin/agetty --noissue --autologin pi %I $TERM
     Type=idle
 
 (3) Passwordless sudo einrichten:
